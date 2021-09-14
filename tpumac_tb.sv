@@ -10,7 +10,7 @@ module tpumac_tb();
 
   tpumac accum (
     .clk(clk),
-    .rst_n(rst),
+    .rst_n(~rst),
     .WrEn(wr_en),
     .en(en),
     .Ain(Ain),
