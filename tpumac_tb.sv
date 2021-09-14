@@ -10,7 +10,7 @@ module tpumac_tb();
 
   tpumac accum (
     .clk(clk),
-    .rst_n(~rst),
+    .rst_n(rst),
     .WrEn(wr_en),
     .en(en),
     .Ain(Ain),
@@ -32,24 +32,20 @@ module tpumac_tb();
     rst = 1;
 
     @(posedge clk);
+	for (int i = 0; i < 100; i = i+1) begin
+		en = 1;
+		Ain = i;
+		Bin = i;
+		@(posedge clk);
+		@(posedge clk);
+		if (Aout !== i || Bout !== i) begin
+			$display("Failure, expected Aout = %d, Bout = %d. Found Aout=%d, Bout=%d",i, i, Aout, Bout);
+			$stop();
+		end
+	end
 
-    rst = 0;
-
-    @(posedge clk);
-
-    en = 1;
-    Ain = 3;
-    Bin = 3;
-    Cin = 3;
-
-    @(posedge clk);
-
-    en = 0;
-
-    if (Aout !== 8'h3 || Bout !== 8'h3 || Cout !== 16'h0C) begin
-      $display("Failure, expected Aout = 3, Bout = 3, Cout = 12. Found Aout=%d, Bout=%d, Cout=%d", Aout, Bout, Cout);
-      $stop();
-    end
+	$display("All tests passed!");
+	$stop();
   end
 
   always
