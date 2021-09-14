@@ -33,6 +33,10 @@ module tpumac_tb();
 
     @(posedge clk);
 
+    rst = 0;
+
+    @(posedge clk);
+
     en = 1;
     Ain = 3;
     Bin = 3;
