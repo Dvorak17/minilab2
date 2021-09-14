@@ -43,7 +43,7 @@ module tpumac_tb();
     en = 0;
 
     if (Aout !== 8'h3 || Bout !== 8'h3 || Cout !== 16'h0C) begin
-      $display("Failure, expected Aout = 3, Bout = 3, Cout = 12");
+      $display("Failure, expected Aout = 3, Bout = 3, Cout = 12. Found Aout=%d, Bout=%d, Cout=%d", Aout, Bout, Cout);
       $stop();
     end
   end
